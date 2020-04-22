@@ -11,12 +11,16 @@ class Task
 
 # READ Methods
   def self.find(id)
+    # Get a specific Record (Task) from the DB
     record = DB.execute('SELECT * FROM tasks WHERE id = ?', id).first
+    # If we get a record from the DB we create an new instance of Task
     record.nil? ? nil : make_instance(record)
   end
 
   def self.all
+    # Get all Records (Task) from the DB
     records = DB.execute('SELECT * FROM tasks')
+    # Iterate through Records
     records.map {|record| make_instance(record)}
   end
 
@@ -33,6 +37,7 @@ class Task
   private
 
   def self.make_instance(record)
+    #Create a new 💎 instance of Task
     Task.new(
       id: record["id"],
       title: record["title"],
